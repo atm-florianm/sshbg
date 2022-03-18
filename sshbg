@@ -125,7 +125,10 @@ if __name__ == "__main__":
         bg_esc_reset, bg_esc_host = colors
 
         # Get our parent pid, which is the PID for the ssh process.
-        ssh_pid = os.getppid()
+        if len(sys.argv) > 1:
+            ssh_pid = int(sys.argv[2])
+        else:
+            ssh_pid = os.getppid()
 
         # Verify that this is not a forwarding connection.
         if not is_interactive(ssh_pid, hostname):
